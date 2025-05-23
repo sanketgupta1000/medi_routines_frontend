@@ -36,6 +36,8 @@ interface Routine
     id: string;
     name: string;
     medicines: {
+        // routine medicine id
+        id: string;
         medicineType: MedicineType;
         medicine: UserDefinedMedicine | PredefinedMedicine;
         schedule: MedicineSchedule[];
