@@ -101,10 +101,8 @@ function CreateRoutineForm() {
     // Simple arrays for the options
     const days: DayOfWeek[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     const times: TimeOfDay[] = ["Morning", "Afternoon", "Evening", "Night"];
-    const medicineTypeList: MedicineType[] = ["PredefinedMedicine", "UserDefinedMedicine"];
-
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+    const medicineTypeList: MedicineType[] = ["PredefinedMedicine", "UserDefinedMedicine"];    return (
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Routine name field */}
             <InputBox
                 type="text"
@@ -115,15 +113,15 @@ function CreateRoutineForm() {
             {errors.name && <InputError>Please enter a routine name</InputError>}
 
             {/* Medicines section */}
-            <div>
-                <h3>Medicines</h3>
+            <div className="space-y-6">
+                <h3 className="text-xl font-medium">Medicines</h3>
                 
                 {/* Loading state for predefined medicines */}
-                {predefinedLoading && <p>Loading medicines...</p>}
+                {predefinedLoading && <p className="text-gray-600 py-2">Loading medicines...</p>}
                 
                 {!predefinedLoading && medicineFields.map((field, medicineIndex) => (
-                    <div key={field.id}>
-                        <h4>Medicine {medicineIndex + 1}</h4>
+                    <div key={field.id} className="p-4 border rounded-lg bg-white mb-6">
+                        <h4 className="font-medium text-lg mb-4">Medicine {medicineIndex + 1}</h4>
                         
                         {/* Medicine type selection */}
                         <SelectInput
@@ -148,14 +146,13 @@ function CreateRoutineForm() {
                         {errors.medicines?.[medicineIndex]?.medicineId && 
                             <InputError>Please select a medicine</InputError>
                         }
-                        
-                        {/* Schedule section */}
-                        <div>
-                            <h5>Schedule</h5>
+                          {/* Schedule section */}
+                        <div className="mt-4">
+                            <h5 className="font-medium mb-3">Schedule</h5>
                             
                             {medicineScheduleArrays[medicineIndex].fields.map((scheduleField, scheduleIndex) => (
-                                <div key={scheduleField.id}>
-                                    <h6>Schedule {scheduleIndex + 1}</h6>
+                                <div key={scheduleField.id} className="border-t pt-4 mb-4">
+                                    <h6 className="text-sm font-medium mb-2">Schedule {scheduleIndex + 1}</h6>
                                     
                                     {/* Day selection */}
                                     <SelectInput
@@ -165,44 +162,46 @@ function CreateRoutineForm() {
                                     />
                                     
                                     {/* Time selection (checkboxes) */}
-                                    <div>
-                                        <p>Times</p>
-                                        {times.map(time => (
-                                            <div key={time}>
-                                                <Controller
-                                                    name={`medicines.${medicineIndex}.schedule.${scheduleIndex}.times`}
-                                                    control={control}
-                                                    rules={{ required: true, validate: times => times.length > 0 }}
-                                                    render={({ field }) => (
-                                                        <Checkbox
-                                                            ref={checkboxRef}
-                                                            label={time}
-                                                            onChange={e => {
-                                                                const checked = e.target.checked;
-                                                                const currentTimes = field.value || [];
-                                                                
-                                                                if (checked && !currentTimes.includes(time)) {
-                                                                    field.onChange([...currentTimes, time]);
-                                                                } else if (!checked && currentTimes.includes(time)) {
-                                                                    field.onChange(currentTimes.filter(t => t !== time));
-                                                                }
-                                                            }}
-                                                            checked={(field.value || []).includes(time)}
-                                                        />
-                                                    )}
-                                                />
-                                            </div>
-                                        ))}
+                                    <div className="mb-4">
+                                        <p className="block mb-1 text-sm font-medium text-gray-700">Times</p>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            {times.map(time => (
+                                                <div key={time}>
+                                                    <Controller
+                                                        name={`medicines.${medicineIndex}.schedule.${scheduleIndex}.times`}
+                                                        control={control}
+                                                        rules={{ required: true, validate: times => times.length > 0 }}
+                                                        render={({ field }) => (
+                                                            <Checkbox
+                                                                ref={checkboxRef}
+                                                                label={time}
+                                                                onChange={e => {
+                                                                    const checked = e.target.checked;
+                                                                    const currentTimes = field.value || [];
+                                                                    
+                                                                    if (checked && !currentTimes.includes(time)) {
+                                                                        field.onChange([...currentTimes, time]);
+                                                                    } else if (!checked && currentTimes.includes(time)) {
+                                                                        field.onChange(currentTimes.filter(t => t !== time));
+                                                                    }
+                                                                }}
+                                                                checked={(field.value || []).includes(time)}
+                                                            />
+                                                        )}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
                                         {errors.medicines?.[medicineIndex]?.schedule?.[scheduleIndex]?.times && 
                                             <InputError>Please select at least one time</InputError>
                                         }
                                     </div>
-                                    
-                                    {/* Remove schedule button */}
+                                      {/* Remove schedule button */}
                                     {medicineScheduleArrays[medicineIndex].fields.length > 1 && (
                                         <Button
                                             type="button"
                                             onClick={() => medicineScheduleArrays[medicineIndex].remove(scheduleIndex)}
+                                            className="mt-2 bg-red-500 hover:bg-red-600"
                                         >
                                             Remove Schedule
                                         </Button>
@@ -214,6 +213,7 @@ function CreateRoutineForm() {
                             <Button
                                 type="button"
                                 onClick={() => medicineScheduleArrays[medicineIndex].append({ day: "Monday", times: [] })}
+                                className="mt-2 bg-gray-600 hover:bg-gray-700"
                             >
                                 Add Schedule
                             </Button>
@@ -224,6 +224,7 @@ function CreateRoutineForm() {
                             <Button
                                 type="button"
                                 onClick={() => removeMedicine(medicineIndex)}
+                                className="mt-4 bg-red-500 hover:bg-red-600"
                             >
                                 Remove Medicine
                             </Button>
@@ -239,6 +240,7 @@ function CreateRoutineForm() {
                         medicineId: "",
                         schedule: [{ day: "Monday", times: [] }]
                     })}
+                    className="mt-2 bg-gray-600 hover:bg-gray-700"
                 >
                     Add Medicine
                 </Button>
@@ -248,6 +250,7 @@ function CreateRoutineForm() {
             <Button 
                 type="submit"
                 loading={submitLoading}
+                className="mt-6 w-full sm:w-auto"
             >
                 {submitLoading ? "Creating..." : "Create Routine"}
             </Button>

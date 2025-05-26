@@ -16,11 +16,9 @@ function SimpleLink({
 }: SimpleLinkProps)
 {
 
-    return (
-
-        <Link
+    return (        <Link
             to={to}
-            className={`hover:underline ${className}`}
+            className={`text-blue-600 hover:underline hover:text-blue-800 ${className}`}
             {...props}
         >
             {children}

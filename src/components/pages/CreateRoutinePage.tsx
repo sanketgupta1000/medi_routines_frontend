@@ -3,15 +3,15 @@ import Header from "../ui/Header";
 
 function CreateRoutinePage()
 {
-    return (
-
-        <>
+    return (        <>
         
             <Header />
 
-            <h2>Create Routine</h2>
+            <div className="max-w-2xl mx-auto p-4">
+                <h2 className="text-2xl font-semibold mb-6">Create Routine</h2>
 
-            <CreateRoutineForm />
+                <CreateRoutineForm />
+            </div>
 
         </>
 

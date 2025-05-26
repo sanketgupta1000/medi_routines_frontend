@@ -42,14 +42,13 @@ function RoutinePage() {
     
     // Find the routine by ID
     const routine = routines.find(r => r.id === routineId);
-    
-    // If routine not found
+      // If routine not found
     if (!routine) {
         return (
-            <div>
+            <div className="max-w-3xl mx-auto px-4 py-6">
                 <Header />
-                <h2>Routine not found</h2>
-                <Link to="/routines">Back to Routines</Link>
+                <h2 className="text-2xl font-semibold mb-4 text-red-600">Routine not found</h2>
+                <Link to="/routines" className="text-blue-600 hover:underline">Back to Routines</Link>
             </div>
         );
     }
@@ -100,24 +99,22 @@ function RoutinePage() {
                 "Night": 3 
             };
             return (timeOrder[a.time] || 0) - (timeOrder[b.time] || 0);
-        });
-
-    return (
-        <div>
+        });    return (
+        <div className="max-w-3xl mx-auto px-4 py-6">
             <Header />
             
-            <h2>{routine.name}</h2>
+            <h2 className="text-2xl font-semibold mb-6">{routine.name}</h2>
             
-            <div>
-                <h3>Medicines in this Routine</h3>
-                <ul>
+            <div className="mb-8">
+                <h3 className="text-xl font-medium mb-4">Medicines in this Routine</h3>
+                <ul className="space-y-4">
                     {routine.medicines && routine.medicines.map((med) => (
-                        <li key={med.id}>
-                            <strong>{med.medicine?.name || "Unknown medicine"}</strong>
-                            <ul>
+                        <li key={med.id} className="bg-white p-4 rounded-lg shadow-sm">
+                            <strong className="text-lg text-blue-600">{med.medicine?.name || "Unknown medicine"}</strong>
+                            <ul className="mt-2 ml-4 space-y-1">
                                 {med.schedule && med.schedule.map((sched, index) => (
-                                    <li key={index}>
-                                        {sched.day}: {sched.times.join(", ")}
+                                    <li key={index} className="text-gray-700">
+                                        <span className="font-medium">{sched.day}:</span> {sched.times.join(", ")}
                                     </li>
                                 ))}
                             </ul>
@@ -126,22 +123,22 @@ function RoutinePage() {
                 </ul>
             </div>
             
-            <div>
-                <h3>Taken History</h3>
+            <div className="mb-6">
+                <h3 className="text-xl font-medium mb-4">Taken History</h3>
                 {takenGroups.length === 0 ? (
-                    <p>No medicines have been taken yet.</p>
+                    <p className="text-gray-600 bg-gray-100 p-4 rounded-md text-center">No medicines have been taken yet.</p>
                 ) : (
-                    <div>
+                    <div className="space-y-4">
                         {takenGroups.map((group, groupIndex) => (
-                            <div key={groupIndex} style={{ marginBottom: "20px", border: "1px solid #ccc", padding: "10px" }}>
-                                <h4>{group.date} ({group.day}) - {group.time}</h4>
-                                <ul>
+                            <div key={groupIndex} className="border rounded-lg p-4 bg-white shadow-sm">
+                                <h4 className="font-medium mb-2">{group.date} ({group.day}) - {group.time}</h4>
+                                <ul className="space-y-2">
                                     {routine.medicines && routine.medicines.map((med) => (
-                                        <li key={med.id}>
-                                            {med.medicine?.name || "Unknown medicine"}: {
-                                                group.medicines[med.id] ? 
-                                                <span style={{ color: "green" }}>✓ Taken</span> : 
-                                                <span style={{ color: "red" }}>✗ Not Taken</span>
+                                        <li key={med.id} className="flex items-center justify-between">
+                                            <span>{med.medicine?.name || "Unknown medicine"}</span>
+                                            {group.medicines[med.id] ? 
+                                                <span className="text-green-600 font-medium">✓ Taken</span> : 
+                                                <span className="text-red-500 font-medium">✗ Not Taken</span>
                                             }
                                         </li>
                                     ))}
@@ -152,7 +149,9 @@ function RoutinePage() {
                 )}
             </div>
             
-            <Link to="/routines">Back to Routines</Link>
+            <Link to="/routines" className="text-blue-600 hover:underline">
+                Back to Routines
+            </Link>
         </div>
     );
 }

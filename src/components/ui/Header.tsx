@@ -11,22 +11,22 @@ function Header()
 
     const handleLogout = useCallback( () => {
         dispatch(logout());
-    }, [dispatch]);
-
-    return (
-        <nav>
-            <ul>
+    }, [dispatch]);    return (
+        <nav className="bg-white shadow-sm p-4 mb-6">
+            <ul className="flex flex-wrap items-center gap-4 md:gap-6">
                 {!isLoggedIn && (
                     <>
                         <li>
                             <NavLink
-                                to="/auth/signup">
+                                to="/auth/signup"
+                                className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                     Signup
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
-                                to="/auth/login">
+                                to="/auth/login"
+                                className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Login
                             </NavLink>
                         </li>
@@ -36,36 +36,40 @@ function Header()
                     <>
                         <li>
                             <NavLink
-                                to="/routines/upcoming">
+                                to="/routines/upcoming"
+                                className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Upcoming Routines
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
                                 to="/routines"
-                            >
+                                className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 All Routines
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
-                                to="/routines/create">
+                                to="/routines/create"
+                                className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Create Routine
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
-                                to="/medicines/create">
+                                to="/medicines/create"
+                                className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Create Medicine
                             </NavLink>
                         </li>
                         <li>
                             <NavLink
-                                to="/medicines">
+                                to="/medicines"
+                                className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 All Medicines
                             </NavLink>
                         </li>
-                        <li>
+                        <li className="ml-auto">
                             <Button
                                 onClick={handleLogout}
                             >

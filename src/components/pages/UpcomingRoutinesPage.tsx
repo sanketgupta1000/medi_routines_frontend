@@ -65,38 +65,38 @@ function UpcomingRoutinesPage()
         // also update the redux store
         appDispatch(addTakenMedicines({ routineId, takenMedicines }));
 
-    }, [setUpcomingRoutines]);
-
-    // if loading, return loading state
+    }, [setUpcomingRoutines]);    // if loading, return loading state
     if(upcomingLoading)
     {
         return (
-            <div>Loading...</div>
+            <div className="flex justify-center items-center min-h-[200px] text-gray-600">Loading...</div>
         );
     }
 
     return (
 
-        <div>
+        <div className="max-w-3xl mx-auto px-4 py-6">
 
             <Header />
 
-            <h2>Upcoming Routines</h2>
+            <h2 className="text-2xl font-semibold mb-6">Upcoming Routines</h2>
 
-            {upcomingRoutines.map((routine) => (
-                
-                    <ReportTakenForm
-                        key={routine.routineId}
-                        routineId={routine.routineId}
-                        routineName={routine.routineName}
-                        localDate={routine.localDate}
-                        localDay={routine.localDay}
-                        localTime={routine.localTime}
-                        routineMedicines={routine.routineMedicines}
-                        onReportTaken={onReportTaken}
-                    />
+            <div className="space-y-6">
+                {upcomingRoutines.map((routine) => (
+                    
+                        <ReportTakenForm
+                            key={routine.routineId}
+                            routineId={routine.routineId}
+                            routineName={routine.routineName}
+                            localDate={routine.localDate}
+                            localDay={routine.localDay}
+                            localTime={routine.localTime}
+                            routineMedicines={routine.routineMedicines}
+                            onReportTaken={onReportTaken}
+                        />
 
-            ))}
+                ))}
+            </div>
             
 
         </div>

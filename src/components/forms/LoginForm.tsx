@@ -54,11 +54,9 @@ function LoginForm()
             setSubmitLoading(false);
         });
 
-    }, [appDispatch]);
+    }, [appDispatch]);    return (
 
-    return (
-
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
             {/* email field */}
             <InputBox
@@ -88,16 +86,19 @@ function LoginForm()
             <Button
                 type='submit'
                 loading={submitLoading}
+                className="w-full"
             >
                 {submitLoading ? "Logging in..." : "Login"}
             </Button>
 
             {/* simple link to register */}
-            <SimpleLink
-                to='/signup'
-            >
-                Don't have an account? Sign up here.
-            </SimpleLink>
+            <div className="text-center mt-4">
+                <SimpleLink
+                    to='/auth/signup'
+                >
+                    Don't have an account? Sign up here.
+                </SimpleLink>
+            </div>
 
         </form>
 

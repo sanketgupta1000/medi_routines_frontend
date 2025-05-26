@@ -92,42 +92,48 @@ function ReportTakenForm(
         .finally(() => {
             setSubmitLoading(false);
         });
-    }, [setSubmitLoading, navigate, token, routineId, onReportTaken]);
-
-    return (
+    }, [setSubmitLoading, navigate, token, routineId, onReportTaken]);    return (
 
         // routine card
-        <div>
+        <div className="border rounded-lg p-4 bg-white shadow-sm">
 
-            <p>{routineName}: {localDay}, {localTime}: {localDate}</p>
+            <p className="font-medium text-lg mb-3">{routineName}: <span className="text-gray-600">{localDay}, {localTime}: {localDate}</span></p>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 {/* display a checkbox for each routine medicine */}
                 {/* at least one medicine must be selected */}
-                {routineMedicines.map((medicine) => (
-                    <div key={medicine.routineMedicineId}>
-                        <label>
+                <div className="space-y-2 mb-4">
+                    {routineMedicines.map((medicine) => (
+                        <div key={medicine.routineMedicineId} className="flex items-center gap-2">
                             <input
                                 type="checkbox"
+                                id={`med-${medicine.routineMedicineId}`}
                                 value={medicine.routineMedicineId}
+                                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                 {...register("routineMedicines", {
                                     validate: {
                                         notEmpty: (value) => value.length > 0 || "Please select at least one medicine"
                                     }
                                 })}
                             />
-                            {medicine.routineMedicineName}
-                        </label>
-                    </div>
-                ))}
+                            <label htmlFor={`med-${medicine.routineMedicineId}`} className="text-sm font-medium text-gray-700 cursor-pointer">
+                                {medicine.routineMedicineName}
+                            </label>
+                        </div>
+                    ))}
+                </div>
 
                 {errors.routineMedicines && (
-                    <p className="error">Please select at least one medicine</p>
+                    <p className="text-red-500 text-sm mb-3">Please select at least one medicine</p>
                 )}
 
                 {/* submit button */}
 
-                <button type="submit" disabled={submitLoading}>
+                <button 
+                    type="submit" 
+                    disabled={submitLoading}
+                    className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                >
                     {submitLoading ? 'Reporting...' : 'Report Taken'}
                 </button>
             </form>

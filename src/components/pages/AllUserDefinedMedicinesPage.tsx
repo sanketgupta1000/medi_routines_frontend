@@ -12,31 +12,35 @@ function AllUserDefinedMedicinesPage()
     const userDefinedMedicines = useAppSelector(state => state.userDefinedMedicines.userDefinedMedicines);
 
     return (
-        <div>
+        <div className="max-w-3xl mx-auto px-4 py-6">
 
             <Header/>
 
-            <h2>All User Defined Medicines</h2>
+            <h2 className="text-2xl font-semibold mb-6">All User Defined Medicines</h2>
 
             {userDefinedMedicines.length === 0 ? (
-                <div>No medicines found. Add your first medicine!</div>
+                <div className="text-gray-600 bg-gray-100 p-4 rounded-md text-center mb-6">
+                    No medicines found. Add your first medicine!
+                </div>
             ) : (
-                <ul>
+                <ul className="mb-6 space-y-2 border rounded-lg divide-y">
                     {userDefinedMedicines.map(medicine => (
-                        <li key={medicine.id}>
+                        <li key={medicine.id} className="p-3 hover:bg-gray-50">
                             {medicine.name}
                         </li>
                     ))}
                 </ul>
             )}
 
-            <Button onClick={() => navigate("/medicines/create")}>
-                Create New Medicine
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+                <Button onClick={() => navigate("/medicines/create")} className="w-full sm:w-auto">
+                    Create New Medicine
+                </Button>
 
-            <SimpleLink to="/routines">
-                View Your Routines
-            </SimpleLink>
+                <SimpleLink to="/routines" className="text-center w-full sm:w-auto">
+                    View Your Routines
+                </SimpleLink>
+            </div>
         </div>
     );
 }

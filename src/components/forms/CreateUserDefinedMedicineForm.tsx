@@ -58,10 +58,8 @@ function CreateUserDefinedMedicineForm()
             .finally(() => {
                 setSubmitLoading(false);
             });
-    }, [token, dispatch, navigate]);
-
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+    }, [token, dispatch, navigate]);    return (
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Medicine name field */}
             <InputBox
                 type="text"
@@ -75,6 +73,7 @@ function CreateUserDefinedMedicineForm()
             <Button
                 type="submit"
                 loading={submitLoading}
+                className="mt-4 w-full sm:w-auto"
             >
                 {submitLoading ? "Adding..." : "Add Medicine"}
             </Button>

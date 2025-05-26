@@ -36,14 +36,13 @@ function InputBox(
 
     const id = useId();
 
-    return (
-
-        <div>
+    return (        <div className="mb-4">
 
             {/* label if any */}
             {label &&
                 <label
                     htmlFor={id}
+                    className="block mb-1 text-sm font-medium text-gray-700"
                 >
                     {label}
                 </label>
@@ -52,7 +51,7 @@ function InputBox(
             {/* the actual underlying input ele */}
             <input
                 type={type}
-                className={` ${className}`}
+                className={`w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${className}`}
                 placeholder={placeholder}
                 id={id}
                 ref={ref}

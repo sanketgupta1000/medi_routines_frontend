@@ -11,25 +11,27 @@ function AllRoutinesPage() {
     const routines = useAppSelector(state => state.routines.routines);
     
     return (
-        <div>
+        <div className="max-w-3xl mx-auto px-4 py-6">
             <Header />
             
-            <h2>Your Routines</h2>
+            <h2 className="text-2xl font-semibold mb-6">Your Routines</h2>
             
             {routines.length === 0 ? (
-                <div>No routines found. Create your first routine!</div>
+                <div className="text-gray-600 bg-gray-100 p-4 rounded-md text-center">
+                    No routines found. Create your first routine!
+                </div>
             ) : (
-                <ul>
+                <ul className="space-y-4 mb-6">
                     {routines.map((routine, index) => (
-                        <li key={routine.id}>
-                            <Link to={`/routines/${index}`}>
-                                <h3>{routine.name}</h3>
+                        <li key={routine.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                            <Link to={`/routines/${index}`} className="block">
+                                <h3 className="text-xl font-medium text-blue-600 mb-2">{routine.name}</h3>
                                 
                                 {/* Display medicines in this routine */}
-                                <p>Medicines:</p>
-                                <ul>
+                                <p className="text-sm font-medium text-gray-700 mb-1">Medicines:</p>
+                                <ul className="ml-4 text-gray-600">
                                     {routine.medicines && routine.medicines.map((med, index) => (
-                                        <li key={index}>
+                                        <li key={index} className="text-sm py-1">
                                             {med.medicine.name}
                                         </li>
                                     ))}
@@ -40,13 +42,15 @@ function AllRoutinesPage() {
                 </ul>
             )}
             
-            <Button onClick={() => navigate("/routines/create")}>
-                Create New Routine
-            </Button>
-            
-            <Link to="/routines/upcoming">
-                View Upcoming Routines
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+                <Button onClick={() => navigate("/routines/create")} className="w-full sm:w-auto">
+                    Create New Routine
+                </Button>
+                
+                <Link to="/routines/upcoming" className="text-blue-600 hover:underline text-center w-full sm:w-auto">
+                    View Upcoming Routines
+                </Link>
+            </div>
         </div>
     );
 }

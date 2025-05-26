@@ -88,19 +88,17 @@ function SignupForm()
             }
         }
 
-    }, [timezonesLoading]);
-
-    // conditionally render
+    }, [timezonesLoading]);    // conditionally render
     if(timezonesLoading)
     {
         return (
-            <div>Loading...</div>
+            <div className="flex justify-center items-center min-h-[200px] text-gray-600">Loading...</div>
         );
     }
 
     return (
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
             {/* name field */}
             <InputBox
@@ -166,16 +164,19 @@ function SignupForm()
             <Button
                 type='submit'
                 loading={submitLoading}
+                className="w-full"
             >
                 {submitLoading?"Signing up...":"Signup!"}
             </Button>
 
             {/* simplelink to login */}
-            <SimpleLink
-                to="/auth/login"
-            >
-                Already have an account? Login here
-            </SimpleLink>
+            <div className="text-center mt-4">
+                <SimpleLink
+                    to="/auth/login"
+                >
+                    Already have an account? Login here
+                </SimpleLink>
+            </div>
 
         </form>
 
