@@ -10,3 +10,7 @@ const store = configureStore({
 });
 
 export default store;
+
+// exporting state and dispatch type for intellisense
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

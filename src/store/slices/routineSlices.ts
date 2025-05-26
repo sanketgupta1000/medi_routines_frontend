@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Routine } from "../../services/routineService";
+import type { Taken } from "../../services/takenService";
 
 // type of state for the routines
 interface RoutinesState
@@ -31,12 +32,35 @@ export const routinesSlice = createSlice(
             addRoutine: (state, action: PayloadAction<{routine: Routine}>)=>
             {
                 state.routines.push(action.payload.routine);
-            }
+            },
 
+            // to add taken medicines
+            addTakenMedicines: (state, action: PayloadAction<{routineId: String, takenMedicines: Taken[]}>)=>
+            {
+
+                state.routines = state.routines.map((routine)=>
+                {
+                    if(routine.id===action.payload.routineId)
+                    {
+                        const newTaken: Taken[] = routine.takenMedicines;
+                        action.payload.takenMedicines.forEach((t)=>newTaken.push(t));
+                        // create a new routine
+                        const updatedRoutine: Routine = {
+                            id: routine.id,
+                            medicines: routine.medicines,
+                            name: routine.name,
+                            takenMedicines: newTaken
+                        }
+                        return updatedRoutine;
+                    }
+                    else    return routine;
+                })
+
+            }
         }
     }
 )
 
 export default routinesSlice.reducer;
-export const {setRoutines, addRoutine} = routinesSlice.actions;
+export const {setRoutines, addRoutine, addTakenMedicines} = routinesSlice.actions;
 export type {RoutinesState};

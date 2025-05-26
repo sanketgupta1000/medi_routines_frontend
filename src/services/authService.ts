@@ -3,6 +3,7 @@
 import config from '../configs/config';
 import { InvalidDataError, NetworkError, UnknownError } from '../utils/errors/sharedErrors';
 import { InvalidCredentialsError, UserExistsError } from '../utils/errors/userErrors';
+import type { Timezone } from './timezoneService';
 
 // define the type for the signup function
 interface SignupRequest
@@ -10,14 +11,14 @@ interface SignupRequest
     name: string;
     email: string;
     password: string;
-    timezone: string;
+    timezone: Timezone;
 };
 
 interface SignupResponse
 {
     name: string;
     email: string;
-    timezone: string;
+    timezone: Timezone;
 };
 
 // define the type for the login function

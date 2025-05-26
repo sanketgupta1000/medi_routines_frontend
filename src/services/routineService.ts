@@ -84,7 +84,7 @@ interface GetUpcomingRoutinesResponse
         localDate: string;
         localDay: DayOfWeek;
         localTime: TimeOfDay;
-        routineMedicine: {
+        routineMedicines: {
             routineMedicineId: string;
             routineMedicineName: string;
         }[];
@@ -263,5 +263,12 @@ export type {
     MedicineSchedule,
     DayOfWeek,
     TimeOfDay,
-    MedicineType
+    MedicineType,
+    CreateRoutineResponse,
+    GetAllRoutinesRequest,
+    GetAllRoutinesResponse,
+    GetARoutineResuest,
+    GetARoutineResponse,
+    GetUpcomingRoutinesRequest,
+    GetUpcomingRoutinesResponse
 };
