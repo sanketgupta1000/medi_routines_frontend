@@ -14,8 +14,6 @@ function AllUserDefinedMedicinesPage()
     return (
         <div className="max-w-3xl mx-auto px-4 py-6">
 
-            <Header/>
-
             <h2 className="text-2xl font-semibold mb-6">All User Defined Medicines</h2>
 
             {userDefinedMedicines.length === 0 ? (

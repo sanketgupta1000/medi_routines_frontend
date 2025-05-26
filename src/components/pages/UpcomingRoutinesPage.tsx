@@ -77,8 +77,6 @@ function UpcomingRoutinesPage()
 
         <div className="max-w-3xl mx-auto px-4 py-6">
 
-            <Header />
-
             <h2 className="text-2xl font-semibold mb-6">Upcoming Routines</h2>
 
             <div className="space-y-6">

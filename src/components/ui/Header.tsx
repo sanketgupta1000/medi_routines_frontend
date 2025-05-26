@@ -19,6 +19,7 @@ function Header()
                         <li>
                             <NavLink
                                 to="/auth/signup"
+                                end
                                 className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                     Signup
                             </NavLink>
@@ -26,6 +27,7 @@ function Header()
                         <li>
                             <NavLink
                                 to="/auth/login"
+                                end
                                 className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Login
                             </NavLink>
@@ -37,6 +39,7 @@ function Header()
                         <li>
                             <NavLink
                                 to="/routines/upcoming"
+                                end
                                 className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Upcoming Routines
                             </NavLink>
@@ -44,6 +47,7 @@ function Header()
                         <li>
                             <NavLink
                                 to="/routines"
+                                end
                                 className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 All Routines
                             </NavLink>
@@ -51,6 +55,7 @@ function Header()
                         <li>
                             <NavLink
                                 to="/routines/create"
+                                end
                                 className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Create Routine
                             </NavLink>
@@ -58,6 +63,7 @@ function Header()
                         <li>
                             <NavLink
                                 to="/medicines/create"
+                                end
                                 className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 Create Medicine
                             </NavLink>
@@ -65,6 +71,7 @@ function Header()
                         <li>
                             <NavLink
                                 to="/medicines"
+                                end
                                 className={({isActive}) => isActive ? "text-blue-600 font-medium" : "text-gray-700 hover:text-blue-600"}>
                                 All Medicines
                             </NavLink>

@@ -101,7 +101,6 @@ function RoutinePage() {
             return (timeOrder[a.time] || 0) - (timeOrder[b.time] || 0);
         });    return (
         <div className="max-w-3xl mx-auto px-4 py-6">
-            <Header />
             
             <h2 className="text-2xl font-semibold mb-6">{routine.name}</h2>
             

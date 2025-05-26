@@ -12,7 +12,6 @@ function AllRoutinesPage() {
     
     return (
         <div className="max-w-3xl mx-auto px-4 py-6">
-            <Header />
             
             <h2 className="text-2xl font-semibold mb-6">Your Routines</h2>
             

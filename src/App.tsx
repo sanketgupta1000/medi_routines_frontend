@@ -8,6 +8,7 @@ import routineService from './services/routineService';
 import { handleErrorsAfterLogin } from './utils/errors/handlers';
 import { Outlet, useNavigate } from 'react-router';
 import { Toaster } from 'react-hot-toast';
+import Header from './components/ui/Header';
 
 // App.tsx will be the parent most component
 // its purpose is to fetch the user and their other data if the user is logged in on the app load
@@ -111,10 +112,14 @@ function App()
                 reverseOrder={false}
             />
 
+            <Header />
+            
             {
             appLoading?
             <div>Loading...</div>
             :
+
+
             <Outlet/>
             }
 
