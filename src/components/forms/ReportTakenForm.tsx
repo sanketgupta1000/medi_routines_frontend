@@ -9,6 +9,7 @@ import { useCallback, useState } from "react";
 import takenService from "../../services/takenService";
 import { handleErrorsAfterLogin } from "../../utils/errors/handlers";
 import { useNavigate } from "react-router";
+import Checkbox from "../input/Checkbox";
 
 interface ReportTakenFormProps extends UpcomingRoutine
 {
@@ -47,6 +48,7 @@ function ReportTakenForm(
         register,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm<ReportTakenData>({
         defaultValues: {
             // by default, no medicines are selected
@@ -82,7 +84,12 @@ function ReportTakenForm(
             
             // successfully reported taken medicines
             // call the onReportTaken function passed from parent
-            onReportTaken(routineId, localDate, localDay, localTime, resp.taken);
+            console.log(resp.takens);
+            onReportTaken(routineId, localDate, localDay, localTime, resp.takens);
+            // remove from props
+            // routineMedicines = routineMedicines.filter(r=>!data.routineMedicines.includes(r.routineMedicineId));
+            // remove the routineMedicineId from form
+            reset({routineMedicines:[]});
 
         })
         .catch((err: Error) => {
@@ -105,7 +112,8 @@ function ReportTakenForm(
                 <div className="space-y-2 mb-4">
                     {routineMedicines.map((medicine) => (
                         <div key={medicine.routineMedicineId} className="flex items-center gap-2">
-                            <input
+                            <Checkbox
+                                label={medicine.routineMedicineName}
                                 type="checkbox"
                                 id={`med-${medicine.routineMedicineId}`}
                                 value={medicine.routineMedicineId}
@@ -116,9 +124,6 @@ function ReportTakenForm(
                                     }
                                 })}
                             />
-                            <label htmlFor={`med-${medicine.routineMedicineId}`} className="text-sm font-medium text-gray-700 cursor-pointer">
-                                {medicine.routineMedicineName}
-                            </label>
                         </div>
                     ))}
                 </div>

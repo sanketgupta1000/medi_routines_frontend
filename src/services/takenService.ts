@@ -48,7 +48,7 @@ interface CreateMultipleTakenRequest
 
 interface CreateMultipleTakenResponse
 {
-    taken: Taken[];
+    takens: Taken[];
 };
 
 class TakenService

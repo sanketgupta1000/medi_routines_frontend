@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../input/Button";
 import SimpleLink from "../ui/SimpleLink";
-import Header from "../ui/Header";
+import UserDefinedMedicine from "../ui/UserDefinedMedicine";
 
 function AllUserDefinedMedicinesPage()
 {
@@ -22,10 +22,12 @@ function AllUserDefinedMedicinesPage()
                 </div>
             ) : (
                 <ul className="mb-6 space-y-2 border rounded-lg divide-y">
-                    {userDefinedMedicines.map(medicine => (
-                        <li key={medicine.id} className="p-3 hover:bg-gray-50">
-                            {medicine.name}
-                        </li>
+                    {userDefinedMedicines.map((medicine) => (
+                        <UserDefinedMedicine
+                            key={medicine.id}
+                            id={medicine.id}
+                            name={medicine.name}
+                        />
                     ))}
                 </ul>
             )}

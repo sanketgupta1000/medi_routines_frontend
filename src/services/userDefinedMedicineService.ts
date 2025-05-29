@@ -1,4 +1,6 @@
 import config from "../configs/config";
+import { RoutineExistsWhileDeletingMedicineError } from "../utils/errors/medicineErrors";
+import { MedicineNotFoundError } from "../utils/errors/routineErrors";
 import { InvalidDataError, NetworkError, UnknownError } from "../utils/errors/sharedErrors";
 import { InvalidCredentialsError } from "../utils/errors/userErrors";
 
@@ -28,6 +30,12 @@ interface GetAllUserDefinedMedicinesResponse
 {
     userDefinedMedicines: UserDefinedMedicine[];
 };
+
+interface DeleteUserDefinedMedicineRequest
+{
+    token: string;
+    userDefinedMedicine: string;
+}
 
 class UserDefinedMedicineService
 {
@@ -110,6 +118,48 @@ class UserDefinedMedicineService
         return data as GetAllUserDefinedMedicinesResponse;
     }
 
+    // method to delete user defined medicine
+    async deleteUserDefinedMedicine(request: DeleteUserDefinedMedicineRequest): Promise<void>
+    {
+        let response: Response;
+
+        try
+        {
+            response = await fetch(`${config.baseUrl}/api/user-defined-medicine/${request.userDefinedMedicine}`, 
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${request.token}`,
+                },
+            });
+        }
+        catch (error)
+        {
+            console.log(error);
+            throw new NetworkError('Please check your network connection');
+        }
+
+        if(response.status === 401)
+        {
+            throw new InvalidCredentialsError('Invalid credentials, please login again');
+        }
+        if(response.status === 404)
+        {
+            throw new MedicineNotFoundError('Predefined medicine not found');
+        }
+        if(response.status === 409)
+        {
+            throw new RoutineExistsWhileDeletingMedicineError('Cannot delete medicine as it is used in one or more routines');
+        }
+
+        if(response.status != 204)
+        {
+            throw new UnknownError('An unknown error occurred');
+        }
+        // No content to return, just ensure the request was successful
+        return;
+    }
 };
 
 export default new UserDefinedMedicineService();

@@ -1,5 +1,4 @@
 import CreateRoutineForm from "../forms/CreateRoutineForm";
-import Header from "../ui/Header";
 
 function CreateRoutinePage()
 {

@@ -31,6 +31,13 @@ export const userDefinedMedicineSlice = createSlice(
             addUserDefinedMedicine: (state, action: PayloadAction<{userDefinedMedicine: UserDefinedMedicine}>)=>
             {
                 state.userDefinedMedicines.push(action.payload.userDefinedMedicine);
+            },
+
+            // remove user defined medicine
+            // can be used right after a successful deletion of a medicine
+            removeUserDefinedMedicine: (state, action: PayloadAction<{userDefinedMedicineId: string}>)=>
+            {
+                state.userDefinedMedicines = state.userDefinedMedicines.filter(m => m.id !== action.payload.userDefinedMedicineId);
             }
 
         }
@@ -38,5 +45,5 @@ export const userDefinedMedicineSlice = createSlice(
 );
 
 export default userDefinedMedicineSlice.reducer;
-export const {setUserDefinedMedicines, addUserDefinedMedicine} = userDefinedMedicineSlice.actions;
+export const {setUserDefinedMedicines, addUserDefinedMedicine, removeUserDefinedMedicine} = userDefinedMedicineSlice.actions;
 export type {UserDefinedMedicinesState};

@@ -34,6 +34,14 @@ export const routinesSlice = createSlice(
                 state.routines.push(action.payload.routine);
             },
 
+            removeRoutine: (state, action: PayloadAction<{routineId: string}>)=>
+            {
+                state.routines = state.routines.filter((routine)=>
+                {
+                    return routine.id !== action.payload.routineId;
+                });
+            },
+
             // to add taken medicines
             addTakenMedicines: (state, action: PayloadAction<{routineId: String, takenMedicines: Taken[]}>)=>
             {
@@ -62,5 +70,5 @@ export const routinesSlice = createSlice(
 )
 
 export default routinesSlice.reducer;
-export const {setRoutines, addRoutine, addTakenMedicines} = routinesSlice.actions;
+export const {setRoutines, addRoutine, removeRoutine, addTakenMedicines} = routinesSlice.actions;
 export type {RoutinesState};

@@ -1,6 +1,4 @@
 import SignupForm from "../forms/SignupForm";
-import Header from "../ui/Header";
-
 function SignupPage() {
 
     return(        <>

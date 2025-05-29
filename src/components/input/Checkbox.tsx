@@ -18,6 +18,14 @@ function Checkbox({
     const id = useId();
 
     return (        <div className="flex items-center gap-2">
+            
+                        <input
+                            type="checkbox"
+                            id={id}
+                            className={`h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 ${className}`}
+                            ref={ref}
+                            {...rest}
+                        />
 
             {/* label if any */}
             {label &&
@@ -30,14 +38,6 @@ function Checkbox({
                 </label>
 
             }
-
-            <input
-                type="checkbox"
-                id={id}
-                className={`h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 ${className}`}
-                ref={ref}
-                {...rest}
-            />
 
         </div>
 

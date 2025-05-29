@@ -20,7 +20,7 @@ interface MedicineSchedule
 interface MedicineEntry
 {
     medicineType: MedicineType;
-    medicineId: string;
+    medicine: string;
     schedule: MedicineSchedule[];
 };
 
@@ -89,6 +89,12 @@ interface GetUpcomingRoutinesResponse
             routineMedicineName: string;
         }[];
     }[];
+};
+
+interface DeleteRoutineRequest
+{
+    token: string;
+    routineId: string;
 };
 
 class RoutineService
@@ -253,6 +259,45 @@ class RoutineService
 
         return data as GetUpcomingRoutinesResponse;
     }
+
+    // delete a routine
+    async deleteRoutine(request: DeleteRoutineRequest): Promise<void>
+    {
+        let response: Response;
+
+        try
+        {
+            response = await fetch(`${config.baseUrl}/api/routine/${request.routineId}`, 
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${request.token}`,
+                },
+            });
+        }
+        catch (error)
+        {
+            console.log(error);
+            throw new NetworkError('Please check your network connection');
+        }
+
+        if(response.status === 401)
+        {
+            throw new InvalidCredentialsError((await response.json()).message);
+        }
+        if(response.status === 404)
+        {
+            throw new RoutineNotFoundError((await response.json()).message);
+        }
+        if(response.status != 204)
+        {
+            throw new UnknownError('An unknown error occurred');
+        }
+        // if we reach here, the routine was deleted successfully
+        return;
+    }
+
 }
 
 export default new RoutineService();

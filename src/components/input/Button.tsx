@@ -4,7 +4,7 @@ import React from 'react'
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 {
     type?: "button" | "submit",
-    onClick?: () => void,
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>|null) => void,
     children: React.ReactNode,
     className?: string,
     disabled?: boolean,

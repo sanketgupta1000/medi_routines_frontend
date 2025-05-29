@@ -1,6 +1,4 @@
 import CreateUserDefinedMedicineForm from "../forms/CreateUserDefinedMedicineForm";
-import Header from "../ui/Header";
-
 function CreateUserDefinedMedicinePage()
 {
     return (        <>
