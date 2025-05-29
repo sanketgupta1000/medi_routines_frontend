@@ -115,7 +115,6 @@ function ReportTakenForm(
                             <Checkbox
                                 label={medicine.routineMedicineName}
                                 type="checkbox"
-                                id={`med-${medicine.routineMedicineId}`}
                                 value={medicine.routineMedicineId}
                                 className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                 {...register("routineMedicines", {

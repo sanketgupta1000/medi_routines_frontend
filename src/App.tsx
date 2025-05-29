@@ -9,6 +9,7 @@ import { handleErrorsAfterLogin } from './utils/errors/handlers';
 import { Outlet, useNavigate } from 'react-router';
 import { Toaster } from 'react-hot-toast';
 import Header from './components/ui/Header';
+import {requestNotificationPermission} from "./services/notificationService";
 
 // App.tsx will be the parent most component
 // its purpose is to fetch the user and their other data if the user is logged in on the app load
@@ -21,6 +22,8 @@ function App()
 
     // token
     const token = useAppSelector(store=>store.user.token);
+
+    const isLoggedIn = useAppSelector(store=>store.user.isLoggedIn);
 
     // dispatcher
     const appDispatch = useAppDispatch();
@@ -102,6 +105,29 @@ function App()
         }
 
     }, [token]);
+
+    // useEffect for push notifications
+    useEffect(()=>
+    {
+        if(isLoggedIn)
+        {
+            // user is logged in
+            const setupnNotifications = async()=>
+            {
+                console.log("Attempting to setup push notifications");
+                try
+                {
+                    await requestNotificationPermission(token!);
+                }
+                catch(err)
+                {
+                    console.log(err);
+                    handleErrorsAfterLogin(err, navigate);
+                }
+            }
+            setupnNotifications();
+        }
+    }, [isLoggedIn]);
 
 
     return (
